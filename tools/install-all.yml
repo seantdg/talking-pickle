@@ -1,0 +1,6 @@
+---
+- name: install everything
+  hosts: localhost
+  connection: local
+  roles:
+    - development

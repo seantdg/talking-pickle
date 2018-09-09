@@ -1,0 +1,9 @@
+---
+- name: Install Development Tools 
+  apt:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+  - curl
+
+

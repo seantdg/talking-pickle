@@ -1,0 +1,18 @@
+{
+  "name": "talking-pickle",
+  "version": "1.0.0",
+  "description": "Seans Development Environment",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "build": "docker build -t talking-pickle/env .",
+    "run": "docker run -v $(pwd):/home/sean/talking-pickle -it talking-pickle/env",
+    "test": "./node_modules/.bin/cucumber-js test"
+  },
+  "author": "Sean Davis",
+  "devDependencies": {
+    "cucumber": "^4.2.1",
+    "docker-cli-js": "^2.5.1"
+  }
+}
