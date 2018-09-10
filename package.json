@@ -6,13 +6,15 @@
     "test": "test"
   },
   "scripts": {
-    "build": "docker build -t talking-pickle/env .",
+    "build": "gulp build",
     "run": "docker run -v $(pwd):/home/sean/talking-pickle -it talking-pickle/env",
-    "test": "./node_modules/.bin/cucumber-js test"
+    "test": "gulp test"
   },
   "author": "Sean Davis",
   "devDependencies": {
     "cucumber": "^4.2.1",
-    "docker-cli-js": "^2.5.1"
+    "docker-cli-js": "^2.5.1",
+    "gulp": "next",
+    "gulp-cucumber": "0.0.23"
   }
 }
