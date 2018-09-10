@@ -12,7 +12,7 @@
   },
   "author": "Sean Davis",
   "devDependencies": {
-    "cucumber": "^4.2.1",
+    "cucumber": "^3",
     "docker-cli-js": "^2.5.1",
     "gulp": "next",
     "gulp-cucumber": "0.0.23"
