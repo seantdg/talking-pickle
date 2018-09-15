@@ -4,7 +4,7 @@ const {
     Then,
     AfterAll
 } = require('cucumber');
-
+const util = require('util');
 const {
     Docker
 } = require('docker-cli-js');
