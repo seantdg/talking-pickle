@@ -41,7 +41,7 @@ const runTestCommand = function (command, ctx) {
         }),
         exec(command).then(function(data) {
             console.log("SD2" + JSON.stringify(data))
-            ctx.localResponse = data.raw;
+            ctx.localResponse = data.stdout;
         })
     ]);
 };
