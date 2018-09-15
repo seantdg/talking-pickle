@@ -40,7 +40,7 @@ const runTestCommand = function (command, ctx) {
         }),
         exec(command).then(function(data) {
             ctx.localResponse = data.raw;
-        }); 
+        })
     ]);
 };
 
