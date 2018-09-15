@@ -4,18 +4,16 @@ const {
     Then,
     AfterAll
 } = require('cucumber');
-const util = require('util');
 const {
     Docker
 } = require('docker-cli-js');
+const util = require('util');
 const exec = util.promisify(require('child_process').exec);
+
+const docker = new Docker();
 const containerName = 'talking-pickle-test';
 
 Given('I have a running talking-pickle instance', function() {
-    //what if this tested using docker, AND local debian?
-
-    //check if .picklerc is present? or check if talking-pickle binary is present?
-    let docker = new Docker();
     return docker.command('run --name ' + containerName + ' -itd talking-pickle/env');
 });
 
@@ -36,11 +34,9 @@ const runTestCommand = function (command, ctx) {
     let docker = new Docker();
     return Promise.all([
         docker.command('exec ' + containerName + ' ' + command).then(function(data) {
-            console.log("SD1" + JSON.stringify(data))
             ctx.dockerResponse = data.raw;
         }),
         exec(command).then(function(data) {
-            console.log("SD2" + JSON.stringify(data))
             ctx.localResponse = data.stdout;
         })
     ]);
