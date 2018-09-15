@@ -8,9 +8,13 @@ const {
 const {
     Docker
 } = require('docker-cli-js');
+const exec = util.promisify(require('child_process').exec);
 const containerName = 'talking-pickle-test';
 
 Given('I have a running talking-pickle instance', function() {
+    //what if this tested using docker, AND local debian?
+
+    //check if .picklerc is present? or check if talking-pickle binary is present?
     let docker = new Docker();
     return docker.command('run --name ' + containerName + ' -itd talking-pickle/env');
 });
@@ -20,7 +24,7 @@ When('I make a curl request to HTTP Bin', function() {
 });
 
 Then('I receive a JSON response', function() {
-    return JSON.parse(this.response);
+    return testResponse(JSON.parse, this);
 });
 
 AfterAll(function() {
@@ -29,8 +33,17 @@ AfterAll(function() {
 });
 
 const runTestCommand = function (command, ctx) {
-    let docker = new Docker();
-    return docker.command('exec ' + containerName + ' ' + command).then(function(data) {
-        ctx.response = data.raw;
-    });
+    return Promise.all([
+        let docker = new Docker();
+        docker.command('exec ' + containerName + ' ' + command).then(function(data) {
+            ctx.dockerResponse = data.raw;
+        }),
+        exec(command).then(function(data) {
+            ctx.localResponse = data.raw;
+        }); 
+    ]);
+};
+
+const testResponse = function (testFunction, ctx) {
+    return testFunction(ctx.dockerResponse) && testFunction(ctx.localResponse);
 };
