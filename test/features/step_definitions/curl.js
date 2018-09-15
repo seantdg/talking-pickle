@@ -33,8 +33,8 @@ AfterAll(function() {
 });
 
 const runTestCommand = function (command, ctx) {
+    let docker = new Docker();
     return Promise.all([
-        let docker = new Docker();
         docker.command('exec ' + containerName + ' ' + command).then(function(data) {
             ctx.dockerResponse = data.raw;
         }),
