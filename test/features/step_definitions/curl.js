@@ -36,9 +36,11 @@ const runTestCommand = function (command, ctx) {
     let docker = new Docker();
     return Promise.all([
         docker.command('exec ' + containerName + ' ' + command).then(function(data) {
+            console.log("SD1" + JSON.stringify(data))
             ctx.dockerResponse = data.raw;
         }),
         exec(command).then(function(data) {
+            console.log("SD2" + JSON.stringify(data))
             ctx.localResponse = data.raw;
         })
     ]);
