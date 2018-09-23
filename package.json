@@ -8,11 +8,12 @@
   "scripts": {
     "build": "docker build -t talking-pickle/env .",
     "run": "docker run -v $(pwd):/home/sean/talking-pickle -it talking-pickle/env",
-    "test": "./node_modules/.bin/cucumber-js test"
+    "test": "(./node_modules/.bin/cucumber-js test -f json:./test/cucumber_report.json || true)  && node ./test/gen-report.js"
   },
   "author": "Sean Davis",
   "devDependencies": {
     "cucumber": "^4.2.1",
+    "cucumber-html-reporter": "^4.0.4",
     "docker-cli-js": "^2.5.1"
   }
 }

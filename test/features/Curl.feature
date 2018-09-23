@@ -1,4 +1,4 @@
-Feature: 
+Feature: Curl
     As an API Developer
     I want curl to be installed
     So that I can make HTTP requests
